@@ -1,9 +1,9 @@
 <template>
-    <div class="min-h-screen bg-yellow-100 text-yellow-900 font-mono">
+    <div class="min-h-screen bg-emerald-50 text-yellow-900 font-mono">
         <div class="w-full flex flex-wrap space-between select-none border-b border-purple-200">
             <div
-                class="border px-5 py-3 leading-32 border-purple-200 text-purple-800 cursor-pointer"
-                :class="identities.length === 0 ? 'bg-emerald-100' : ''"
+                class="border px-5 py-3 leading-32 border-purple-200 text-purple-800 cursor-pointer transition-opacity"
+                :class="creating_identity ? 'opacity-0' : identities.length === 0 ? 'bg-emerald-100' : ''"
                 v-on:click="newIdentity"
             >New Identity</div>
             <div
@@ -28,7 +28,7 @@
                 class="border rounded-b p-2 cursor-pointer font-bold bg-red-100 border-red-200 text-red-900"
                 :class="deleting ? 'text-blue-200 bg-slate-100' : ''"
                 v-on:click="deleteActive"
-            >Delete Identity ({{ active_identity?.name }})</div>
+            >Delete Identity (🪦 {{ active_identity?.name }})</div>
         </div>
     </div>
 </template>
@@ -60,13 +60,19 @@ onMounted(() => {
                 typeof identities.value[active_identity_index.value] !==
                 "object"
             ) {
-                console.log("what");
                 newIdentity();
             }
         });
 });
 
+const creating_identity = ref(false);
+
 const newIdentity = () => {
+    if (creating_identity.value) {
+        return;
+    }
+    creating_identity.value = true;
+    setTimeout(() => (creating_identity.value = false), 3000);
     identities.value.push(app.$identity().person());
     active_identity_index.value = identities.value.length - 1;
     app.$localstorage().save();

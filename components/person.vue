@@ -2,6 +2,7 @@
 const props = defineProps({ person: Object });
 
 const {
+    first_name,
     name: full_name,
     avatar,
     jobTitle,
@@ -12,13 +13,14 @@ const {
     bio_phrase,
     password,
     password_secure,
+    password_secure2,
+    password_secure3,
     email,
     username,
     address: { address, city, postcode },
-    bank: { issuer, number, cvv },
 } = props.person;
 
-const person_title = full_name + " @" + username + " (" + birthdate + ")";
+const person_title = full_name + " @" + username;
 const saving = ref(false);
 const app = useNuxtApp();
 const save_person = () => {
@@ -33,21 +35,24 @@ const save_person = () => {
     <div>
         <!-- <div>{{ person }}</div> -->
 
-        <div class="p-6">
+        <div class="p-6 break-words">
             <card :title="person_title">
-                <div class="flex pt-2">
+                <div class="flex flex-col sm:flex-row pt-2">
                     <div class="select-none">
-                        <img :src="avatar" alt="avatar" class="rounded-full shadow-lg" />
+                        <img :src="avatar" alt="avatar" class="rounded-full shadow-lg w-48 mx-auto" />
                     </div>
 
                     <div class="p-6">
-                        <div>{{ person.email }}</div>
+                        <div class="font-bold">{{ person.email }}</div>
+                        <div class="font-bold tracking-widest text-lg">{{ password_secure }}</div>
+                        <div class="mt-2 italic">Extra passwords:</div>
                         <div>{{ password }}</div>
-                        <div>{{ password_secure }}</div>
+                        <div>{{ password_secure2 }}</div>
+                        <div>{{ password_secure3 }}</div>
                     </div>
                 </div>
             </card>
-            <div class="italic text-sm px-6 mb-12 text-xs text-center">{{ bio }}</div>
+            <div class="italic text-sm px-6 mb-6 text-xs text-center text-purple-500">{{ bio }}</div>
 
             <card :title="'Email inbox - ' + person.email">
                 <slot />
@@ -68,17 +73,15 @@ const save_person = () => {
                 >Saved!</div>
             </card>
 
-            <div class="flex gap-6">
-                <card title="Additional info">
-                    <div>{{ jobTitle }} at {{ employer }}</div>
+            <div class="flex gap-6 flex-col md:flex-row">
+                <card :title="'About ' + first_name">
+                    <div class="mt-3">{{ jobTitle }} at {{ employer }}</div>
+                    <div class="my-1">birthdate: {{ birthdate }}</div>
 
-                    <div class="mt-3">{{ address }}, {{ city }}, {{ postcode }}</div>
-                    <div>{{ phone }}</div>
-                </card>
-                <card title="Bank">
-                    <div>{{ issuer }}</div>
-                    <div>{{ number }}</div>
-                    <div>{{ cvv }}</div>
+                    <div class="border-b my-4"></div>
+                    <div class="mt-1">{{ address }}, {{ city }}</div>
+                    <div>{{ postcode }}</div>
+                    <div class="my-2">phone: {{ phone }}</div>
                 </card>
             </div>
         </div>

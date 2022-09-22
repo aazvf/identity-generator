@@ -1,5 +1,6 @@
 // import { faker } from "@faker-js/faker/locale/en_GB";
-import { faker } from "@faker-js/faker/locale/en_IE";
+// import { faker } from "@faker-js/faker/locale/en_IE";
+import { faker } from "@faker-js/faker/locale/en_GB";
 
 class Identity {
     constructor() {
@@ -42,42 +43,22 @@ class Identity {
             bio_phrase: faker.hacker.phrase(),
             password: faker.internet.password(20, true),
             password_secure: faker.internet.password(20, false, /[A-Za-z0-9!\$]/),
+            password_secure2: faker.internet.password(20, false, /[A-Za-z0-9!\$]/),
+            password_secure3: faker.internet.password(20, false, /[A-Za-z0-9!\$]/),
             email: "",
-            mailjs: { id: "", token: "", messages: [] },
+            mailjs: { id: "", token: "", messages: [], registered: false },
+            address: {
+                address: faker.address.streetAddress(true),
+                city: faker.address.cityName(),
+                postcode: faker.address.zipCode(),
+            },
         };
         person.name = person.first_name + " " + person.last_name;
         person.username = faker.internet.userName(person.first_name, person.last_name).toLowerCase() + faker.random.numeric(2);
         if (this.domain.value.length > 0) {
             person.email = person.username + "@" + this.domain.value;
         }
-        // person.email = faker.internet.email(person.first_name, person.last_name);
-        person.address = this.address();
-        person.bank = this.bank();
-        person.car = this.car();
         return person;
-    }
-
-    address() {
-        return {
-            address: faker.address.streetAddress(true),
-            city: faker.address.cityName(),
-            postcode: faker.address.zipCode(),
-        };
-    }
-
-    bank() {
-        return {
-            issuer: faker.finance.creditCardIssuer(),
-            number: faker.finance.creditCardNumber(),
-            cvv: faker.finance.creditCardCVV(),
-        };
-    }
-
-    car() {
-        return {
-            name: faker.vehicle.vehicle(),
-            reg: faker.vehicle.vrm(),
-        };
     }
 }
 
