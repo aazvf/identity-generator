@@ -5,7 +5,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "deploy": "nuxt generate && aws s3 sync .output/public s3://nuxt3-person-maker/ --profile s3deploy --delete"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.5.0",
