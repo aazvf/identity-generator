@@ -148,11 +148,11 @@ const checked = ref(false);
             <div v-if="checking">Checking email inbox... please wait.</div>
             <div v-else v-on:click="check_mail" class="cursor-pointer">Check for emails now</div>
         </div>
-        <a
+        <!-- <a
             class="absolute -bottom-4 -right-2 border py-0.5 px-2 border-slate-400 text-slate-400 bg-slate-50 rounded text-xs hover:bg-slate-200"
             target="_blank"
             href="https://mail.tm/en/"
             rel="noopener noreferer"
-        >View inbox @ mail.tm</a>
+        >View inbox @ mail.tm</a>-->
     </div>
 </template>
