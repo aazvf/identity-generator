@@ -1,5 +1,5 @@
 <script setup>
-import Mailjs from "@/mailjs/index";
+import Mailjs from "/mailjs/index";
 
 const props = defineProps({
     person: Object,
