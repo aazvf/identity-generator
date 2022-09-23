@@ -4,8 +4,26 @@ import { faker } from "@faker-js/faker/locale/en_GB";
 
 class Identity {
     constructor() {
+        this.identities = useIdentities();
+        this.identity_index = useIdentityIndex();
         this.domain = useMailDomain();
     }
+
+    removeIdentity(index) {
+        identities.value.splice(index, 1);
+        this.identity_index.value = Math.max(0, this.identity_index.value - 1);
+        this.saveIdentities();
+    }
+
+    newIdentity() {
+        this.identities.value.push(this.person());
+        this.saveIdentities();
+    }
+
+    saveIdentities() {
+        useNuxtApp().$localstorage().save();
+    }
+
     person() {
         const datetime = faker.date.birthdate({ min: 24, max: 44, mode: "age" });
 
@@ -40,7 +58,6 @@ class Identity {
                 faker.hacker.noun() +
                 "! ",
 
-            bio_phrase: faker.hacker.phrase(),
             password: faker.internet.password(20, true),
             password_secure: faker.internet.password(20, false, /[A-Za-z0-9!\$]/),
             password_secure2: faker.internet.password(20, false, /[A-Za-z0-9!\$]/),

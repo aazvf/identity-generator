@@ -1,4 +1,5 @@
 import type * as type from "./types";
+// https://github.com/cemalgnlts/Mailjs/blob/master/src/index.ts
 
 class Mailjs {
     private baseUrl: string;

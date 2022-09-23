@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({ person: Object });
+const props = defineProps({ identity: Object });
 
 const {
     first_name,
@@ -10,7 +10,6 @@ const {
     birthdate,
     phone,
     bio,
-    bio_phrase,
     password,
     password_secure,
     password_secure2,
@@ -18,7 +17,7 @@ const {
     email,
     username,
     address: { address, city, postcode },
-} = props.person;
+} = props.identity;
 
 const person_title = full_name + " @" + username;
 const saving = ref(false);
@@ -29,12 +28,10 @@ const save_person = () => {
     setTimeout(() => (saving.value = false), 2000);
 };
 </script>
-
+    
 
 <template>
     <div>
-        <!-- <div>{{ person }}</div> -->
-
         <div class="p-6 break-words">
             <card :title="person_title">
                 <div class="flex flex-col sm:flex-row pt-2">
@@ -43,7 +40,7 @@ const save_person = () => {
                     </div>
 
                     <div class="p-6">
-                        <div class="font-bold">{{ person.email }}</div>
+                        <div class="font-bold">{{ identity.email }}</div>
                         <div class="font-bold tracking-widest text-lg">{{ password_secure }}</div>
                         <div class="mt-2 italic">Extra passwords:</div>
                         <div>{{ password }}</div>
@@ -54,14 +51,14 @@ const save_person = () => {
             </card>
             <div class="italic text-sm px-6 mb-6 text-xs text-center text-purple-500">{{ bio }}</div>
 
-            <card :title="'Email inbox - ' + person.email">
+            <card :title="'Email inbox - ' + identity.email">
                 <slot />
             </card>
 
             <card title="Notes" class="relative">
                 <textarea
                     v-on:blur="save_person"
-                    v-model="person.notes"
+                    v-model="identity.notes"
                     id="message"
                     rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
