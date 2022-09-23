@@ -119,7 +119,6 @@ const get_message = (id, html = false) => {
     <template>
     <div class="relative">
         <div class="pb-3">
-            {{ person.mailjs.registered }}
             <div
                 v-for="(message, index) in person.mailjs.messages"
                 :key="index"
