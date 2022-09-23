@@ -13,7 +13,7 @@ const newIdentity = () => {
     }
     creating_identity.value = true;
     setTimeout(() => (creating_identity.value = false), 3000);
-    useNuxtApp().$localstorage().newIdentity();
+    useNuxtApp().$identity().newIdentity();
 };
 </script>
     
