@@ -23,7 +23,6 @@ onMounted(() => {
 if (domain.value.length === 0) {
     client.getDomains().then((response) => {
         domain.value = response.data[0].domain;
-        console.log(props.person.email.length);
         if (props.person.email.length < 2) {
             props.person.email = props.person.username + "@" + domain.value;
             app.$localstorage().save();
@@ -43,10 +42,8 @@ const check_mail = () => {
     checking.value = true;
 
     if (!props.person.mailjs.token || !props.person.mailjs.id) {
-        console.log("login");
         login().then(get_messages);
     } else {
-        console.log("login from cache");
         client.id = props.person.mailjs.id;
         client.token = props.person.mailjs.token;
         get_messages();
