@@ -1,7 +1,7 @@
 # Identity Generator
 
 
-Live site: [http://nuxt3-person-maker.s3-website-eu-west-1.amazonaws.com/](http://nuxt3-person-maker.s3-website-eu-west-1.amazonaws.com/)
+Live site: [http://inbox.aazvf.art/](http://inbox.aazvf.art/)
 
 
 
